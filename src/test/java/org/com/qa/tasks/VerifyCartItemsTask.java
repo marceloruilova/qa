@@ -21,7 +21,7 @@ public class VerifyCartItemsTask implements Task {
         // Wait until the table body is visible
         actor.attemptsTo(
                 WaitUntil.the(TABLE_BODY, isVisible())
-                        .forNoMoreThan(10).seconds()
+                        .forNoMoreThan(5).seconds()
         );
 
         // Find all rows in the table body

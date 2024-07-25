@@ -25,7 +25,7 @@ public class OpenMainPageAndVerifyProductsTask implements Task {
 
         actor.attemptsTo(
                 WaitUntil.the(PRODUCT_IMAGES, isVisible())
-                        .forNoMoreThan(10).seconds()
+                        .forNoMoreThan(5).seconds()
         );
 
         List<WebElement> products = BrowseTheWeb.as(actor).getDriver().findElements(PRODUCT_IMAGES);
