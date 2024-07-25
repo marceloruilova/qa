@@ -9,21 +9,26 @@ import org.openqa.selenium.By;
 
 public class AddProductCartTask implements Task {
 
+    private final String childNumber;
 
-    private static final By PRODUCT_IMAGE = By.cssSelector("#tbodyid > div:nth-child(1) > div > a > img");
+    public AddProductCartTask(String childNumber) {
+        this.childNumber = childNumber;
+    }
+
 
     @Override
     public <T extends Actor> void performAs(T actor) {
+        By by = By.cssSelector("#tbodyid > div:nth-child(" + childNumber + ") > div > a > img");
         actor.attemptsTo(
-                WaitUntil.the(PRODUCT_IMAGE, WebElementStateMatchers.isVisible())
+                WaitUntil.the(by, WebElementStateMatchers.isVisible())
                         .forNoMoreThan(10).seconds(),
-                Click.on(PRODUCT_IMAGE)
+                Click.on(by)
         );
 
-        }
+    }
 
-    public static AddProductCartTask addProduct() {
-        return new AddProductCartTask();
+    public static AddProductCartTask addProduct(String childNumber) {
+        return new AddProductCartTask(childNumber);
     }
 
 }
