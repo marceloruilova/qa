@@ -14,7 +14,7 @@ public class AddProductCartTask implements Task {
     @Override
     public <T extends Actor> void performAs(T actor) {
         actor.attemptsTo(
-                Click.on(By.className("card-img-top img-fluid"))
+                Click.on(By.cssSelector("#tbodyid > div:nth-child(1) > div > a > img"))
         );
     }
 
