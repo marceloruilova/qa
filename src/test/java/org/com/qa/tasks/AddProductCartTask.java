@@ -15,7 +15,6 @@ public class AddProductCartTask implements Task {
         this.childNumber = childNumber;
     }
 
-
     @Override
     public <T extends Actor> void performAs(T actor) {
         By by = By.cssSelector("#tbodyid > div:nth-child(" + childNumber + ") > div > a > img");

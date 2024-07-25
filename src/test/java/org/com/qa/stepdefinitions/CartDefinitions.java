@@ -7,10 +7,7 @@ import net.serenitybdd.annotations.Managed;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import org.assertj.core.api.Assertions;
-import org.com.qa.tasks.AddProductCartTask;
-import org.com.qa.tasks.ClickAddToCartButtonTask;
-import org.com.qa.tasks.ClickHomeButtonTask;
-import org.com.qa.tasks.OpenMainPageAndVerifyProductsTask;
+import org.com.qa.tasks.*;
 import org.openqa.selenium.WebDriver;
 
 public class CartDefinitions {
@@ -43,7 +40,7 @@ public class CartDefinitions {
     @When("the user returns to the main page and clicks another product")
     public void theUserReturnsToTheMainPageAndClicksAnotherProduct() {
         actor.attemptsTo(
-                ClickHomeButtonTask.clickHomeButton()
+                ClickNavButtonTask.clickButton("index")
         );
         String currentUrl = BrowseTheWeb.as(actor).getDriver().getCurrentUrl();
         Assertions.assertThat(currentUrl).isEqualTo("https://www.demoblaze.com/index.html");
@@ -51,6 +48,18 @@ public class CartDefinitions {
         actor.attemptsTo(AddProductCartTask.addProduct("2"));
 
         actor.attemptsTo(ClickAddToCartButtonTask.clickAddToCartButton());
+    }
+
+    @When("the user navigates to the cart page")
+    public void theUserNavigatesToTheCartPage() {
+        actor.attemptsTo(
+                ClickNavButtonTask.clickButton("cart")
+        );
+        String currentUrl = BrowseTheWeb.as(actor).getDriver().getCurrentUrl();
+
+        Assertions.assertThat(currentUrl).isEqualTo("https://www.demoblaze.com/cart.html");
+
+        actor.attemptsTo(VerifyCartItemsTask.verifyItemsInCart());
     }
 
     @Then("products should be added to the cart")
