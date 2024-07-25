@@ -16,17 +16,18 @@ Comandos de instalación
 
 IntelliJ Idea:
 
-1. Go to the right bar and click the m icon for Maven.
-2. Click on lifecycle and then install.
+1. Dirigirse a la barra derecha y hacer click en la m (maven).
+2. Clikear lifecycle y luego en install.
 
 Instrucciones para ejecutar los test
 
-1. Go to the right bar and click the m icon for Maven.
-2. click on lifecycle and then test.
+1. Dirigirse a la barra derecha y hacer click en la m (maven).
+2. Clikear lifecycle y luego en test.
 
-Another way of executing is going to the CartRunner folder,
-in the left part you can see the icon of running and debugging tests(green color icon).
+Una mejor forma de probar y como yo la hice es dirigirse al archivo
+CartRunner y al lado de public aparece un icono para correr el test o debugear
 
 Información adicional
 
-We can use headless mode to run the tests faster than they are running now.
+La mejor manera de testearlo es dirigiendose al archivo CartRunner.
+Se puede utilizar headless para que los tests se ejecuten mas rapido.
