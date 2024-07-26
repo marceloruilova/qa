@@ -10,12 +10,13 @@ import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.actors.OnlineCast;
 import org.assertj.core.api.Assertions;
-import org.com.qa.actions.CheckSweetAlertAction;
-import org.com.qa.actions.ClickButtonAction;
-import org.com.qa.actions.ClickNavButtonAction;
+import org.com.qa.actions.*;
 import org.com.qa.models.User;
+import org.com.qa.questions.VerifyCartItemsQuestion;
+import org.com.qa.questions.VerifyElementVisibilityQuestion;
+import org.com.qa.questions.VerifyProductsQuestion;
 import org.com.qa.tasks.*;
-import org.openqa.selenium.By;
+import org.com.qa.userinterfaces.OrderModalElements;
 import org.openqa.selenium.WebDriver;
 
 public class CartDefinitions {
@@ -32,63 +33,76 @@ public class CartDefinitions {
     @Given("a list of products on the main page")
     public void aListOfProductsOnTheMainPage() {
         OnStage.theActorInTheSpotlight().attemptsTo(
-                OpenMainPageTask.open(),
-                VerifyProductsTask.verify()
+                OpenMainPageTask.open()
         );
     }
+
+    @Then("there should be more than {int} products on the main page")
+    public void thereShouldBeMoreThanProductsOnTheMainPage(int count) {
+        Actor actor = OnStage.theActorInTheSpotlight();
+        boolean result = actor.asksFor(VerifyProductsQuestion.hasMoreThan(count));
+        Assertions.assertThat(result).isTrue();
+    }
+
 
     @When("the user clicks a product")
     public void theUserClicksAProduct() {
-        Actor actor = OnStage.theActorInTheSpotlight();
-        actor.attemptsTo(AddProductToCartTask.addProduct("1"));
-
-        String currentUrl = BrowseTheWeb.as(actor).getDriver().getCurrentUrl();
-        Assertions.assertThat(currentUrl).isEqualTo("https://www.demoblaze.com/prod.html?idp_=1");
+        String productNumber = "1";
+        OnStage.theActorInTheSpotlight().attemptsTo(
+                ClickProductAction.addProduct(productNumber),
+                VerifyLinkAction.verifyUrl("https://www.demoblaze.com/prod.html?idp_=" + productNumber)
+        );
     }
 
-    @When("the user clicks the Add to cart button on the product page")
+    @When("the user clicks the add to cart button on the product page")
     public void theUserClicksAddToCartButton() {
-        OnStage.theActorInTheSpotlight().attemptsTo(ClickAddToCartButtonTask.clickAddToCartButton());
+        OnStage.theActorInTheSpotlight().attemptsTo(
+                ClickAddToCartButtonTask.clickAddToCartButton()
+        );
     }
 
-    @When("the user returns to the main page and clicks another product")
+    @When("the user returns to the main page")
     public void theUserReturnsToTheMainPageAndClicksAnotherProduct() {
         Actor actor = OnStage.theActorInTheSpotlight();
         actor.attemptsTo(
-                ClickNavButtonAction.clickButton("index")
+                ClickNavButtonAction.clickButton("index"),
+                VerifyLinkAction.verifyUrl("https://www.demoblaze.com/index.html")
         );
-        String currentUrl = BrowseTheWeb.as(actor).getDriver().getCurrentUrl();
-        Assertions.assertThat(currentUrl).isEqualTo("https://www.demoblaze.com/index.html");
+    }
 
-        actor.attemptsTo(AddProductToCartTask.addProduct("2"));
-
-        currentUrl = BrowseTheWeb.as(actor).getDriver().getCurrentUrl();
-        Assertions.assertThat(currentUrl).isEqualTo("https://www.demoblaze.com/prod.html?idp_=2");
-
-        actor.attemptsTo(ClickAddToCartButtonTask.clickAddToCartButton());
+    @Then("the user clicks another product")
+    public void clickAnotherProduct() {
+        String productNumber = "2";
+        OnStage.theActorInTheSpotlight().attemptsTo(
+                ClickProductAction.addProduct(productNumber),
+                VerifyLinkAction.verifyUrl("https://www.demoblaze.com/prod.html?idp_=" + productNumber),
+                ClickAddToCartButtonTask.clickAddToCartButton()
+        );
     }
 
     @When("the user navigates to the cart page")
     public void theUserNavigatesToTheCartPage() {
         Actor actor = OnStage.theActorInTheSpotlight();
         actor.attemptsTo(
-                ClickNavButtonAction.clickButton("cart")
+                ClickNavButtonAction.clickButton("cart"),
+                VerifyLinkAction.verifyUrl("https://www.demoblaze.com/cart.html")
         );
-        String currentUrl = BrowseTheWeb.as(actor).getDriver().getCurrentUrl();
-        Assertions.assertThat(currentUrl).isEqualTo("https://www.demoblaze.com/cart.html");
     }
 
     @Then("products should be added to the cart")
     public void productShouldBeAddedToTheCart() {
-        OnStage.theActorInTheSpotlight().attemptsTo(VerifyCartItemsTask.verify());
+        Actor actor = OnStage.theActorInTheSpotlight();
+        Boolean areItemsCorrect = actor.asksFor(VerifyCartItemsQuestion.areCorrect());
+        Assertions.assertThat(areItemsCorrect).isTrue();
     }
 
     @When("the user clicks the place order button")
     public void theUserClickPlaceOrderButton() {
         Actor actor = OnStage.theActorInTheSpotlight();
+//        todo, fix
         actor.attemptsTo(ClickButtonAction.clickButton("#page-wrapper > div > div.col-lg-1 > button"));
 
-        boolean isModalVisible = BrowseTheWeb.as(actor).getDriver().findElement(By.cssSelector("#orderModal")).isDisplayed();
+        Boolean isModalVisible = actor.asksFor(VerifyElementVisibilityQuestion.isVisible(OrderModalElements.ORDER_MODAL));
         Assertions.assertThat(isModalVisible).isTrue();
     }
 

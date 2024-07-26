@@ -8,9 +8,11 @@ Feature: Add new products to the cart
   @SuccessfulAddToCart
   Scenario: Adding multiple products to the cart
     Given a list of products on the main page
+    Then there should be more than 3 products on the main page
     When the user clicks a product
-    And the user clicks the Add to cart button on the product page
-    And the user returns to the main page and clicks another product
+    And the user clicks the add to cart button on the product page
+    And the user returns to the main page
+    Then the user clicks another product
     And the user navigates to the cart page
     Then products should be added to the cart
     When the user clicks the place order button

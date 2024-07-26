@@ -6,6 +6,7 @@ import net.serenitybdd.screenplay.actions.Click;
 import org.openqa.selenium.By;
 
 public class ClickButtonAction implements Performable {
+
     private final String buttonSelector;
 
     public ClickButtonAction(String buttonSelector) {
