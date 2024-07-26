@@ -81,9 +81,7 @@ public class CartDefinitions {
 
     @Then("the user should be on the main page {string}")
     public void theUserShouldBeOnThePageMainPage(String expectedUrl) {
-        Actor actor = OnStage.theActorInTheSpotlight();
-        Boolean isUrlCorrect = actor.asksFor(VerifyLinkQuestion.verifyUrl(expectedUrl));
-        Assertions.assertThat(isUrlCorrect).isTrue();
+        verifyPageUrl(expectedUrl, "main page");
     }
 
     @Then("the user clicks another product")
@@ -118,9 +116,7 @@ public class CartDefinitions {
 
     @Then("the user should be on the cart page {string}")
     public void theUserShouldBeOnTheCartPage(String expectedUrl) {
-        Actor actor = OnStage.theActorInTheSpotlight();
-        Boolean isUrlCorrect = actor.asksFor(VerifyLinkQuestion.verifyUrl(expectedUrl));
-        Assertions.assertThat(isUrlCorrect).isTrue();
+        verifyPageUrl(expectedUrl, "cart page");
     }
 
     @Then("products should be added to the cart")
@@ -148,4 +144,11 @@ public class CartDefinitions {
         actor.attemptsTo(ClickButtonAction.clickButton(CartPageElements.PURCHASE_MODAL_BUTTON));
         actor.attemptsTo(CheckSweetAlertAction.isVisible());
     }
+
+    private void verifyPageUrl(String expectedUrl, String pageDescription) {
+        Actor actor = OnStage.theActorInTheSpotlight();
+        Boolean isUrlCorrect = actor.asksFor(VerifyLinkQuestion.verifyUrl(expectedUrl));
+        Assertions.assertThat(isUrlCorrect).as("The user is not on the " + pageDescription).isTrue();
+    }
+
 }
