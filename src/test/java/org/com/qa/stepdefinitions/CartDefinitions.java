@@ -16,6 +16,7 @@ import org.com.qa.questions.VerifyCartItemsQuestion;
 import org.com.qa.questions.VerifyElementVisibilityQuestion;
 import org.com.qa.questions.VerifyProductsQuestion;
 import org.com.qa.tasks.*;
+import org.com.qa.userinterfaces.CartPageElements;
 import org.com.qa.userinterfaces.OrderModalElements;
 import org.openqa.selenium.WebDriver;
 
@@ -49,9 +50,16 @@ public class CartDefinitions {
     public void theUserClicksAProduct() {
         String productNumber = "1";
         OnStage.theActorInTheSpotlight().attemptsTo(
-                ClickProductAction.addProduct(productNumber),
-                VerifyLinkAction.verifyUrl("https://www.demoblaze.com/prod.html?idp_=" + productNumber)
+                ClickProductAction.addProduct(productNumber)
         );
+    }
+
+    @Then("the user should be on the product page with product1 {string}")
+    public void theUserShouldBeOnThePageWithURL(String expectedUrl) {
+        String productNumber = "1";
+        Actor actor = OnStage.theActorInTheSpotlight();
+        Boolean isUrlCorrect = actor.asksFor(VerifyLinkQuestion.verifyUrl(expectedUrl + productNumber));
+        Assertions.assertThat(isUrlCorrect).isTrue();
     }
 
     @When("the user clicks the add to cart button on the product page")
@@ -61,21 +69,39 @@ public class CartDefinitions {
         );
     }
 
-    @When("the user returns to the main page")
+    @When("the user clicks the main page button")
     public void theUserReturnsToTheMainPageAndClicksAnotherProduct() {
         Actor actor = OnStage.theActorInTheSpotlight();
         actor.attemptsTo(
-                ClickNavButtonAction.clickButton("index"),
-                VerifyLinkAction.verifyUrl("https://www.demoblaze.com/index.html")
+                ClickNavButtonAction.clickButton("index")
         );
+    }
+
+    @Then("the user should be on the main page {string}")
+    public void theUserShouldBeOnThePageMainPage(String expectedUrl) {
+        Actor actor = OnStage.theActorInTheSpotlight();
+        Boolean isUrlCorrect = actor.asksFor(VerifyLinkQuestion.verifyUrl(expectedUrl));
+        Assertions.assertThat(isUrlCorrect).isTrue();
     }
 
     @Then("the user clicks another product")
     public void clickAnotherProduct() {
         String productNumber = "2";
         OnStage.theActorInTheSpotlight().attemptsTo(
-                ClickProductAction.addProduct(productNumber),
-                VerifyLinkAction.verifyUrl("https://www.demoblaze.com/prod.html?idp_=" + productNumber),
+                ClickProductAction.addProduct(productNumber)
+        );
+    }
+
+    @Then("the user should be on the product page with product2 {string}")
+    public void theUserShouldBeOnTheProductPage(String expectedUrl) {
+        Actor actor = OnStage.theActorInTheSpotlight();
+        Boolean isUrlCorrect = actor.asksFor(VerifyLinkQuestion.verifyUrl(expectedUrl + "2"));
+        Assertions.assertThat(isUrlCorrect).isTrue();
+    }
+
+    @Then("the user clicks add to cart button")
+    public void clickAddToCartButton() {
+        OnStage.theActorInTheSpotlight().attemptsTo(
                 ClickAddToCartButtonTask.clickAddToCartButton()
         );
     }
@@ -84,9 +110,15 @@ public class CartDefinitions {
     public void theUserNavigatesToTheCartPage() {
         Actor actor = OnStage.theActorInTheSpotlight();
         actor.attemptsTo(
-                ClickNavButtonAction.clickButton("cart"),
-                VerifyLinkAction.verifyUrl("https://www.demoblaze.com/cart.html")
+                ClickNavButtonAction.clickButton("cart")
         );
+    }
+
+    @Then("the user should be on the cart page {string}")
+    public void theUserShouldBeOnTheCartPage(String expectedUrl) {
+        Actor actor = OnStage.theActorInTheSpotlight();
+        Boolean isUrlCorrect = actor.asksFor(VerifyLinkQuestion.verifyUrl(expectedUrl));
+        Assertions.assertThat(isUrlCorrect).isTrue();
     }
 
     @Then("products should be added to the cart")
@@ -99,8 +131,7 @@ public class CartDefinitions {
     @When("the user clicks the place order button")
     public void theUserClickPlaceOrderButton() {
         Actor actor = OnStage.theActorInTheSpotlight();
-//        todo, fix
-        actor.attemptsTo(ClickButtonAction.clickButton("#page-wrapper > div > div.col-lg-1 > button"));
+        actor.attemptsTo(ClickButtonAction.clickButton(CartPageElements.PLACE_ORDER_BUTTON));
 
         Boolean isModalVisible = actor.asksFor(VerifyElementVisibilityQuestion.isVisible(OrderModalElements.ORDER_MODAL));
         Assertions.assertThat(isModalVisible).isTrue();
@@ -112,7 +143,7 @@ public class CartDefinitions {
         User user = new User("John Doe", "USA", "New York", "1234567812345678", "12", "2024");
 
         actor.attemptsTo(FillFormTask.withUser(user));
-        actor.attemptsTo(ClickButtonAction.clickButton("#orderModal > div > div > div.modal-footer > button.btn.btn-primary"));
+        actor.attemptsTo(ClickButtonAction.clickButton(CartPageElements.PURCHASE_MODAL_BUTTON));
         actor.attemptsTo(CheckSweetAlertAction.isVisible());
     }
 }

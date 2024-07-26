@@ -3,23 +3,22 @@ package org.com.qa.actions;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.actions.Click;
-import org.openqa.selenium.By;
+import net.serenitybdd.screenplay.targets.Target;
 
 public class ClickButtonAction implements Performable {
 
-    private final String buttonSelector;
+    private final Target button;
 
-    public ClickButtonAction(String buttonSelector) {
-        this.buttonSelector = buttonSelector;
+    public ClickButtonAction(Target button) {
+        this.button = button;
     }
 
     @Override
     public <T extends Actor> void performAs(T actor) {
-        By by = By.cssSelector(buttonSelector);
-        actor.attemptsTo(Click.on(by));
+        actor.attemptsTo(Click.on(button));
     }
 
-    public static ClickButtonAction clickButton(String buttonSelector) {
-        return new ClickButtonAction(buttonSelector);
+    public static ClickButtonAction clickButton(Target button) {
+        return new ClickButtonAction(button);
     }
 }
