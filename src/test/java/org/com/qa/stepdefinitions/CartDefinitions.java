@@ -14,9 +14,11 @@ import org.com.qa.actions.*;
 import org.com.qa.models.User;
 import org.com.qa.questions.VerifyCartItemsQuestion;
 import org.com.qa.questions.VerifyElementVisibilityQuestion;
+import org.com.qa.questions.VerifyLinkQuestion;
 import org.com.qa.questions.VerifyProductsQuestion;
 import org.com.qa.tasks.*;
 import org.com.qa.userinterfaces.CartPageElements;
+import org.com.qa.userinterfaces.MainPageElements;
 import org.com.qa.userinterfaces.OrderModalElements;
 import org.openqa.selenium.WebDriver;
 
@@ -50,7 +52,7 @@ public class CartDefinitions {
     public void theUserClicksAProduct() {
         String productNumber = "1";
         OnStage.theActorInTheSpotlight().attemptsTo(
-                ClickProductAction.addProduct(productNumber)
+                ClickProductAction.addProduct(MainPageElements.PRODUCT(productNumber))
         );
     }
 
@@ -88,7 +90,7 @@ public class CartDefinitions {
     public void clickAnotherProduct() {
         String productNumber = "2";
         OnStage.theActorInTheSpotlight().attemptsTo(
-                ClickProductAction.addProduct(productNumber)
+                ClickProductAction.addProduct(MainPageElements.PRODUCT(productNumber))
         );
     }
 

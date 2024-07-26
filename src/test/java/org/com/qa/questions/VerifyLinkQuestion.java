@@ -1,4 +1,4 @@
-package org.com.qa.actions;
+package org.com.qa.questions;
 
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Question;
