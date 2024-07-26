@@ -7,6 +7,10 @@ import net.serenitybdd.screenplay.actions.Click;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class ClickAddToCartButtonTask implements Task {
 
@@ -16,8 +20,9 @@ public class ClickAddToCartButtonTask implements Task {
     public <T extends Actor> void performAs(T actor) {
         actor.attemptsTo(Click.on(ADD_TO_CART_BUTTON));
         WebDriver driver = BrowseTheWeb.as(actor).getDriver();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         try {
-            Alert alert = driver.switchTo().alert();
+            Alert alert = wait.until(ExpectedConditions.alertIsPresent());
             alert.accept();
         } catch (Exception e) {
             // No alert present, continue
