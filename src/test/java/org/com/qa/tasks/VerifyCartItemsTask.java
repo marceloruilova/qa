@@ -5,6 +5,7 @@ import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.serenitybdd.screenplay.waits.WaitUntil;
 import org.assertj.core.api.Assertions;
+import org.com.qa.userinterfaces.CartPageElements;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -14,24 +15,19 @@ import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisi
 
 public class VerifyCartItemsTask implements Task {
 
-    private static final By TABLE_BODY = By.cssSelector(".table tbody");
-
     @Override
     public <T extends Actor> void performAs(T actor) {
-        // Wait until the table body is visible
         actor.attemptsTo(
-                WaitUntil.the(TABLE_BODY, isVisible())
+                WaitUntil.the(CartPageElements.TABLE_BODY, isVisible())
                         .forNoMoreThan(5).seconds()
         );
 
-        // Find all rows in the table body
         List<WebElement> rows = BrowseTheWeb.as(actor).getDriver().findElements(By.cssSelector(".table tbody tr"));
 
-        // Assert that there are exactly two rows
         Assertions.assertThat(rows).hasSize(2);
     }
 
-    public static VerifyCartItemsTask verifyItemsInCart() {
+    public static VerifyCartItemsTask verify() {
         return new VerifyCartItemsTask();
     }
 }

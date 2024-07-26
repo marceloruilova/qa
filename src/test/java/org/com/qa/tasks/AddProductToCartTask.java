@@ -7,11 +7,11 @@ import net.serenitybdd.screenplay.matchers.WebElementStateMatchers;
 import net.serenitybdd.screenplay.waits.WaitUntil;
 import org.openqa.selenium.By;
 
-public class AddProductCartTask implements Task {
+public class AddProductToCartTask implements Task {
 
     private final String childNumber;
 
-    public AddProductCartTask(String childNumber) {
+    public AddProductToCartTask(String childNumber) {
         this.childNumber = childNumber;
     }
 
@@ -23,11 +23,10 @@ public class AddProductCartTask implements Task {
                         .forNoMoreThan(10).seconds(),
                 Click.on(by)
         );
-
     }
 
-    public static AddProductCartTask addProduct(String childNumber) {
-        return new AddProductCartTask(childNumber);
+    public static AddProductToCartTask addProduct(String childNumber) {
+        return new AddProductToCartTask(childNumber);
     }
 
 }
