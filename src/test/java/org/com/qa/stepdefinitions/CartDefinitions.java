@@ -118,7 +118,7 @@ public class CartDefinitions {
         verifyPageUrl(expectedUrl, "cart page");
     }
 
-    @Then("products should be added to the cart")
+    @Then("selected products should be on the cart page")
     public void productShouldBeAddedToTheCart() {
         Actor actor = OnStage.theActorInTheSpotlight();
         Boolean areItemsCorrect = actor.asksFor(VerifyCartItemsQuestion.areCorrect());
