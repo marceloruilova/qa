@@ -5,7 +5,6 @@ import net.serenitybdd.screenplay.Question;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 
 public class VerifyLinkQuestion implements Question<Boolean> {
-
     private final String expectedUrl;
 
     public VerifyLinkQuestion(String expectedUrl) {

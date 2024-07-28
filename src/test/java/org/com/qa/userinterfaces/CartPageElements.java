@@ -1,6 +1,7 @@
 package org.com.qa.userinterfaces;
 
 import net.serenitybdd.screenplay.targets.Target;
+import org.openqa.selenium.By;
 
 public class CartPageElements {
 
@@ -12,5 +13,8 @@ public class CartPageElements {
 
     public static final Target PURCHASE_MODAL_BUTTON = Target.the("Purchase modal button")
             .locatedBy("#orderModal > div > div > div.modal-footer > button.btn.btn-primary");
+
+    public static final Target SWEET_ALERT_MODAL = Target.the("Sweet alert modal")
+            .located(By.cssSelector("body > div.sweet-alert.showSweetAlert.visible"));
 
 }

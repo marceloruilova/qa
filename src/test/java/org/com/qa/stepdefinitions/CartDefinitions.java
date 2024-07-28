@@ -12,10 +12,7 @@ import net.serenitybdd.screenplay.actors.OnlineCast;
 import org.assertj.core.api.Assertions;
 import org.com.qa.actions.*;
 import org.com.qa.models.User;
-import org.com.qa.questions.VerifyCartItemsQuestion;
-import org.com.qa.questions.VerifyElementVisibilityQuestion;
-import org.com.qa.questions.VerifyLinkQuestion;
-import org.com.qa.questions.VerifyProductsQuestion;
+import org.com.qa.questions.*;
 import org.com.qa.tasks.*;
 import org.com.qa.userinterfaces.CartPageElements;
 import org.com.qa.userinterfaces.MainPageElements;
@@ -56,7 +53,7 @@ public class CartDefinitions {
         );
     }
 
-    @Then("the user should be on the product page with product1 {string}")
+    @Then("the user should be on the product page with product1 and URL {string}")
     public void theUserShouldBeOnThePageWithURL(String expectedUrl) {
         String productNumber = "1";
         Actor actor = OnStage.theActorInTheSpotlight();
@@ -67,7 +64,8 @@ public class CartDefinitions {
     @When("the user clicks the add to cart button on the product page")
     public void theUserClicksAddToCartButton() {
         OnStage.theActorInTheSpotlight().attemptsTo(
-                ClickAddToCartButtonTask.clickAddToCartButton()
+                ClickAddToCartButtonTask.clickAddToCartButton(),
+                JSAlertAction.acceptAlert()
         );
     }
 
@@ -92,7 +90,7 @@ public class CartDefinitions {
         );
     }
 
-    @Then("the user should be on the product page with product2 {string}")
+    @Then("the user should be on the product page with product2 and URL {string}")
     public void theUserShouldBeOnTheProductPage(String expectedUrl) {
         Actor actor = OnStage.theActorInTheSpotlight();
         Boolean isUrlCorrect = actor.asksFor(VerifyLinkQuestion.verifyUrl(expectedUrl + "2"));
@@ -102,7 +100,8 @@ public class CartDefinitions {
     @Then("the user clicks add to cart button")
     public void clickAddToCartButton() {
         OnStage.theActorInTheSpotlight().attemptsTo(
-                ClickAddToCartButtonTask.clickAddToCartButton()
+                ClickAddToCartButtonTask.clickAddToCartButton(),
+                JSAlertAction.acceptAlert()
         );
     }
 
@@ -142,7 +141,8 @@ public class CartDefinitions {
 
         actor.attemptsTo(FillFormTask.withUser(user));
         actor.attemptsTo(ClickButtonAction.clickButton(CartPageElements.PURCHASE_MODAL_BUTTON));
-        actor.attemptsTo(CheckSweetAlertAction.isVisible());
+        Boolean isSweetAlertVisible = actor.asksFor(VerifySweetAlertQuestion.isVisible());
+        Assertions.assertThat(isSweetAlertVisible).isTrue();
     }
 
     private void verifyPageUrl(String expectedUrl, String pageDescription) {
