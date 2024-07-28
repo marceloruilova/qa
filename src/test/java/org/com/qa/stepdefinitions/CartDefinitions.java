@@ -64,7 +64,7 @@ public class CartDefinitions {
     @When("the user clicks the add to cart button on the product page")
     public void theUserClicksAddToCartButton() {
         OnStage.theActorInTheSpotlight().attemptsTo(
-                ClickAddToCartButtonTask.clickAddToCartButton(),
+                ClickAddToCartButtonAction.clickAddToCartButton(),
                 JSAlertAction.acceptAlert()
         );
     }
@@ -100,7 +100,7 @@ public class CartDefinitions {
     @Then("the user clicks add to cart button")
     public void clickAddToCartButton() {
         OnStage.theActorInTheSpotlight().attemptsTo(
-                ClickAddToCartButtonTask.clickAddToCartButton(),
+                ClickAddToCartButtonAction.clickAddToCartButton(),
                 JSAlertAction.acceptAlert()
         );
     }
@@ -141,7 +141,7 @@ public class CartDefinitions {
 
         actor.attemptsTo(FillFormTask.withUser(user));
         actor.attemptsTo(ClickButtonAction.clickButton(CartPageElements.PURCHASE_MODAL_BUTTON));
-        Boolean isSweetAlertVisible = actor.asksFor(VerifySweetAlertQuestion.isVisible());
+        Boolean isSweetAlertVisible = actor.asksFor(VerifySweetAlertQuestion.isVisible(CartPageElements.SWEET_ALERT_MODAL));
         Assertions.assertThat(isSweetAlertVisible).isTrue();
     }
 

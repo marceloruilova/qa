@@ -6,8 +6,12 @@ import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.matchers.WebElementStateMatchers;
 import net.serenitybdd.screenplay.targets.Target;
 import net.serenitybdd.screenplay.waits.WaitUntil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ClickProductAction implements Task {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ClickProductAction.class);
 
     private final Target product;
 
@@ -17,6 +21,7 @@ public class ClickProductAction implements Task {
 
     @Override
     public <T extends Actor> void performAs(T actor) {
+        LOGGER.info("Clicking on product: {}", product.getCssOrXPathSelector());
         actor.attemptsTo(
                 WaitUntil.the(product, WebElementStateMatchers.isVisible())
                         .forNoMoreThan(10).seconds(),

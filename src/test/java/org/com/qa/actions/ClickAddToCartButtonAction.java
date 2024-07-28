@@ -1,12 +1,12 @@
-package org.com.qa.tasks;
+package org.com.qa.actions;
 
 import net.serenitybdd.screenplay.Actor;
-import net.serenitybdd.screenplay.Task;
+import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.serenitybdd.screenplay.actions.Click;
 import org.com.qa.userinterfaces.ProductPageElements;
 
-public class ClickAddToCartButtonTask implements Task {
+public class ClickAddToCartButtonAction implements Performable {
 
     @Override
     public <T extends Actor> void performAs(T actor) {
@@ -14,7 +14,7 @@ public class ClickAddToCartButtonTask implements Task {
         BrowseTheWeb.as(actor).getDriver();
     }
 
-    public static ClickAddToCartButtonTask clickAddToCartButton() {
-        return new ClickAddToCartButtonTask();
+    public static ClickAddToCartButtonAction clickAddToCartButton() {
+        return new ClickAddToCartButtonAction();
     }
 }

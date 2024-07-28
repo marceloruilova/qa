@@ -163,6 +163,10 @@
                                         <name>continueOnFailure</name>
                                         <value>true</value>
                                     </property>
+                                    <property>
+                                        <name>cucumber.options</name>
+                                        <!--suppress UnresolvedMavenProperty -->
+                                        <value>${cucumber.options}</value> </property>
                                 </properties>
                             </systemPropertyVariables>
                         </configuration>

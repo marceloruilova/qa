@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
         glue = "org.com.qa.stepdefinitions",
         snippets = CucumberOptions.SnippetType.CAMELCASE,
         plugin = "pretty",
-        tags = "@SuccessfulAddToCart"
+        tags = "@SuccessfulPurchase"
 )
 public class CartRunner {
 }

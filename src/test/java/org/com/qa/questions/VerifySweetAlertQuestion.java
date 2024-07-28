@@ -2,17 +2,28 @@ package org.com.qa.questions;
 
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Question;
-import net.serenitybdd.screenplay.questions.WebElementQuestion;
-import org.com.qa.userinterfaces.CartPageElements;
+import net.serenitybdd.screenplay.targets.Target;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class VerifySweetAlertQuestion implements Question<Boolean> {
 
-    @Override
-    public Boolean answeredBy(Actor actor) {
-        return WebElementQuestion.the(CartPageElements.SWEET_ALERT_MODAL).answeredBy(actor).isVisible();
+    private static final Logger LOGGER = LoggerFactory.getLogger(VerifySweetAlertQuestion.class);
+
+    private final Target sweetAlertModal;
+
+    public VerifySweetAlertQuestion(Target sweetAlertModal) {
+        this.sweetAlertModal = sweetAlertModal;
     }
 
-    public static VerifySweetAlertQuestion isVisible() {
-        return new VerifySweetAlertQuestion();
+    @Override
+    public Boolean answeredBy(Actor actor) {
+        Boolean isVisible = sweetAlertModal.resolveFor(actor).isVisible();
+        LOGGER.info("Sweet alert modal visibility: {}", isVisible);
+        return isVisible;
+    }
+
+    public static VerifySweetAlertQuestion isVisible(Target sweetAlertModal) {
+        return new VerifySweetAlertQuestion(sweetAlertModal);
     }
 }
