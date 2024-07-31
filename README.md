@@ -69,6 +69,7 @@ Aquí describiremos las versiones de las dependencias, paquetes u otras tecnolog
 ## Requisitos
 
 1. Cuenta de GitHub para iniciar sesión en Cucumber Reports o una cuenta de Cucumber Reports.
+2. Para ejecución de screenshots y cualquier comando utilizar el "terminal" o "cmd".
 
 ## Funcionamiento
 

@@ -50,7 +50,7 @@ public class CartDefinitions {
         OnStage.setTheStage(new OnlineCast());
         OnStage.theActorCalled("Juan").can(BrowseTheWeb.with(driver));
 
-        testData = JsonDataReader.readJsonData("src/test/resources/features/cart/testdata.json");
+        testData = JsonDataReader.readJsonData("src/test/resources/features/cart/testUser.json");
     }
 
     @Given("a list of products on the main page")
@@ -105,7 +105,7 @@ public class CartDefinitions {
     @Then("the user clicks another product {string}")
     public void clickAnotherProduct(String productNumber) {
         OnStage.theActorInTheSpotlight().attemptsTo(
-                ClickProductAction.addProduct(MainPageElements.PRODUCT(productNumber+"x"))
+                ClickProductAction.addProduct(MainPageElements.PRODUCT(productNumber))
         );
     }
 
