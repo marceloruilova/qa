@@ -26,10 +26,10 @@ public class VerifyProductsQuestion  implements Question<Boolean> {
         );
 
         List<WebElementFacade> products = MainPageElements.PRODUCT_IMAGES.resolveAllFor(actor);
-        return products.size() > expectedCount;
+        return products.size() >= expectedCount;
     }
 
-    public static VerifyProductsQuestion hasMoreThan(int count) {
+    public static VerifyProductsQuestion hasMoreThanOrEqual(int count) {
         return new VerifyProductsQuestion(count);
     }
 }

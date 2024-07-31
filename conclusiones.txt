@@ -1,0 +1,10 @@
+1. No es necesario especificar un json de productos ya que se utiliza el mismo tomado de los webdrivers.
+2. Utilizar json files para agregar información que no es muy relevante para el test por ejemplo el usuario y sus datos,
+esto evitará que se encuentren quemados en el código y probar con diferentes usuarios segun el json.
+3. Utilización de autoconfigure para los drivers es necesario para facilitar la ejecución en otros computadores.
+4. Mantener el patrón de screenplay ayuda a verificar y mantener las responsabilidades de cada uno isoladas.
+5. Dividir en task y actions para los componentes high order y los componentes low order respectivamente.
+6. No se agregó en la parte de java ningún código ya que se investigó que esto se usaba con el patron page object.
+7. Utilizar userinterfaces ayuda a la separación de código para tenerlo más organizado a nuestros selectores.
+8. Separar las verificaciones en una carpeta a parte llamada questions.
+9.

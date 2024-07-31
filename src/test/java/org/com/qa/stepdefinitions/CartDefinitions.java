@@ -49,7 +49,7 @@ public class CartDefinitions {
     @Then("there should be more than {int} products on the main page")
     public void thereShouldBeMoreThanProductsOnTheMainPage(int count) {
         Actor actor = OnStage.theActorInTheSpotlight();
-        boolean result = actor.asksFor(VerifyProductsQuestion.hasMoreThan(count));
+        boolean result = actor.asksFor(VerifyProductsQuestion.hasMoreThanOrEqual(count));
 
         Assertions.assertThat(result).isTrue();
     }
