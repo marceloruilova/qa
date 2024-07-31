@@ -1,55 +1,66 @@
-Prerequisitos:
+# Prerequisitos
 
-Aquí describiremos las versiones de las dependencias, packages u otro tecnología que se debe tener configurado en su maquina.
+Aquí describiremos las versiones de las dependencias, paquetes u otras tecnologías que se deben tener configuradas en su máquina.
 
-Sistema Operativo: Windows 11 Home Single Language RAM: 16.0 GB PROCESSOR: 11th Gen Intel(R) Core(TM) i7-1165G7
+### Sistema Operativo
+- **Windows 11 Home Single Language**
 
-IDE: IntelliJ IDEA 2024.1.4, se puede usar jetbrains toolbox para instalación.
+### RAM
+- **16.0 GB**
 
-Maven: 4.0.0
+### Procesador
+- **11th Gen Intel(R) Core(TM) i7-1165G7**
 
-JDK: versión 17
+### IDE
+- **IntelliJ IDEA 2024.1.4**
+    - Se puede usar [JetBrains Toolbox](https://www.jetbrains.com/toolbox-app/) para la instalación.
 
-ScreenPlay: 4.1.14
+### Maven
+- **4.0.0**
 
-Comandos de instalación
+### JDK
+- **Versión 17**
 
+### ScreenPlay
+- **Versión 4.1.14**
 
-INTELLIJ:
-1. Dirigirse a la barra derecha y hacer click en la m (maven).
-2. Clikear lifecycle y luego en install.
+---
 
-COMMANDOS(Para utilizar esta opción asegurarse de tener bien configuradas las variables de entorno,
-deben estar configuradas el JAVA_HOME y MAVEN_HOME):
-1. mvn clean (Para limpiar indexes, builds y archivos compilados)
-2. mvn compile
+# Comandos de instalación
 
-Instrucciones para ejecutar los test
+### IntelliJ:
+1. Dirígete a la barra derecha y haz clic en la `m` (Maven).
+2. Haz clic en `Lifecycle` y luego en `install`.
 
-INTELLIJ:
-1. Dirigirse a la barra derecha y hacer click en la m (maven).
-2. Clikear lifecycle y luego en test.
+### Comandos
+> **Nota:** Para utilizar esta opción, asegúrate de tener bien configuradas las variables de entorno `JAVA_HOME` y `MAVEN_HOME`.
 
-COMMANDOS(Para utilizar esta opción asegurarse de tener bien configuradas las variables de entorno,
-deben estar configuradas el JAVA_HOME y MAVEN_HOME):
-https://mkyong.com/maven/how-to-install-maven-in-windows/
-1. mvn clean (remueve el target, builds y componentes compilados).
-2. mvn compile
-3. mvn test (corre todos los tests sin interfaz gráfica)
-4. mvn test -Dtest=CartRunner (corre el test CartRunner específico con interfaz gráfica)
+1. `mvn clean` (Limpia índices, builds y archivos compilados)
+2. `mvn compile`
 
-REPORTES:
-1. Se utilizó los reportes de serenity, para esto dirigirse a la carpeta /target/site/serenity/index.html
-2. Para encontrar dicho archivo primero correr los siguientes comandos:
-mvn compile
-mvn test
-mvn serenity:aggregate
+---
 
-Una mejor forma de probar y como yo la hice es dirigirse al archivo
-CartRunner y al lado de public aparece un icono para correr el test o debugear
+# Instrucciones para ejecutar los tests
 
-Información adicional
+### IntelliJ:
+1. Dirígete a la barra derecha y haz clic en la `m` (Maven).
+2. Haz clic en `Lifecycle` y luego en `test`.
 
-A tener en cuenta el agregar variables de entorno.
-La mejor manera de testearlo es dirigiendose al archivo CartRunner.
-Se puede utilizar headless para que los tests se ejecuten mas rapido.
+### Comandos
+> **Nota:** Para utilizar esta opción, asegúrate de tener bien configuradas las variables de entorno `JAVA_HOME` y `MAVEN_HOME`. Puedes consultar [esta guía](https://mkyong.com/maven/how-to-install-maven-in-windows/) para más detalles.
+
+1. `mvn clean` (Remueve el target, builds y componentes compilados)
+2. `mvn compile`
+3. `mvn test` (Ejecuta todos los tests sin interfaz gráfica)
+4. `mvn test -Dtest=CartRunner` (Ejecuta el test `CartRunner` específico con interfaz gráfica)
+
+---
+
+# Reportes
+
+1. Se utilizan los reportes de Serenity. Dirígete a la carpeta: `/target/site/serenity/index.html`
+2. Para generar los reportes, primero ejecuta los siguientes comandos:
+   ```sh
+   mvn compile
+   mvn test
+   mvn serenity:aggregate
