@@ -64,3 +64,36 @@ Aquí describiremos las versiones de las dependencias, paquetes u otras tecnolog
    mvn compile
    mvn test
    mvn serenity:aggregate
+# Reportes con Cucumber-Reports
+
+## Requisitos
+
+1. Cuenta de GitHub para iniciar sesión en Cucumber Reports o una cuenta de Cucumber Reports.
+
+## Funcionamiento
+
+Para utilizar Cucumber Reports, sigue estos pasos:
+
+1. **Exportar el token:**
+    - Abre el terminal de Windows como administrador.
+    - Haz clic en el menú de inicio, busca "cmd" o "terminal", haz clic derecho sobre él y selecciona "Ejecutar como administrador".
+    - Navega a la carpeta donde se encuentra tu proyecto de testing usando el comando `cd`. Ejemplo:
+      ```sh
+      cd .\Desktop\ntt-data\qa
+      ```
+    - Exporta el token de Cucumber Reports con el siguiente comando:
+      ```sh
+      setx /M CUCUMBER_PUBLISH_TOKEN "tu-token"
+      ```
+
+2. **Ejecutar las pruebas:**
+    - Ejecuta las pruebas con el comando:
+      ```sh
+      mvn test -Dtest=CartRunner
+      ```
+   > **Consideraciones:**
+   > - Asegúrate de usar el terminal de comandos para estos pasos, ya que el IDE debe configurar sus propias variables de entorno.
+   > - Los screenshots no se generarán desde el terminal del IDE por lo de la configuración; solo se generarán desde el terminal de comandos, sin importar si estás ejecutándolo como administrador o no.
+
+3. **Ver los reportes:**
+    - Los reportes se reflejarán en la página de Cucumber Reports.
