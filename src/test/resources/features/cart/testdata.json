@@ -1,16 +1,4 @@
 {
-  "products": [
-    {
-      "name": "CELLPHONE",
-      "productNumber": "1",
-      "url": "https://www.demoblaze.com/prod.html?idp_="
-    },
-    {
-      "name": "TABLET",
-      "productNumber": "2",
-      "url": "https://www.demoblaze.com/prod.html?idp_="
-    }
-  ],
   "user": {
     "name": "Juan",
     "country": "Colombia",

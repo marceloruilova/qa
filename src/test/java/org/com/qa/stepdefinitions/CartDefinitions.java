@@ -55,22 +55,16 @@ public class CartDefinitions {
     }
 
 
-    @When("the user clicks a product")
-    public void theUserClicksAProduct() {
-        JsonNode product = testData.get("products").get(0);
-        String productNumber = product.get("productNumber").asText();
+    @When("the user clicks a product {string}")
+    public void theUserClicksAProduct(String productNumber) {
         OnStage.theActorInTheSpotlight().attemptsTo(
                 ClickProductAction.addProduct(MainPageElements.PRODUCT(productNumber))
         );
     }
 
-    @Then("the user should be on the product page with product1 and URL {string}")
-    public void theUserShouldBeOnThePageWithURL(String expectedUrl) {
-        JsonNode product = testData.get("products").get(0);
-        String productNumber = product.get("productNumber").asText();
-        Actor actor = OnStage.theActorInTheSpotlight();
-        Boolean isUrlCorrect = actor.asksFor(VerifyLinkQuestion.verifyUrl(expectedUrl + productNumber));
-        Assertions.assertThat(isUrlCorrect).isTrue();
+    @Then("the user should be on the product page with product {string} and URL {string}")
+    public void theUserShouldBeOnThePageWithURL(String productNumber, String expectedUrl) {
+        verifyPageUrl(expectedUrl + productNumber, "prod");
     }
 
     @When("the user clicks the add to cart button on the product page")
@@ -94,22 +88,16 @@ public class CartDefinitions {
         verifyPageUrl(expectedUrl, "main page");
     }
 
-    @Then("the user clicks another product")
-    public void clickAnotherProduct() {
-        JsonNode product = testData.get("products").get(1);
-        String productNumber = product.get("productNumber").asText();
+    @Then("the user clicks another product {string}")
+    public void clickAnotherProduct(String productNumber) {
         OnStage.theActorInTheSpotlight().attemptsTo(
                 ClickProductAction.addProduct(MainPageElements.PRODUCT(productNumber))
         );
     }
 
-    @Then("the user should be on the product page with product2 and URL {string}")
-    public void theUserShouldBeOnTheProductPage(String expectedUrl) {
-        JsonNode product = testData.get("products").get(1);
-        String productNumber = product.get("productNumber").asText();
-        Actor actor = OnStage.theActorInTheSpotlight();
-        Boolean isUrlCorrect = actor.asksFor(VerifyLinkQuestion.verifyUrl(expectedUrl + productNumber));
-        Assertions.assertThat(isUrlCorrect).isTrue();
+    @Then("the user should be on the product page with another product {string} and URL {string}")
+    public void theUserShouldBeOnTheProductPage(String productNumber, String expectedUrl) {
+        verifyPageUrl(expectedUrl + productNumber, "prod");
     }
 
     @Then("the user clicks add to cart button")
