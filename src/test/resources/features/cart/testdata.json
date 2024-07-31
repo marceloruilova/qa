@@ -1,0 +1,22 @@
+{
+  "products": [
+    {
+      "name": "CELLPHONE",
+      "productNumber": "1",
+      "url": "https://www.demoblaze.com/prod.html?idp_="
+    },
+    {
+      "name": "TABLET",
+      "productNumber": "2",
+      "url": "https://www.demoblaze.com/prod.html?idp_="
+    }
+  ],
+  "user": {
+    "name": "Juan",
+    "country": "Colombia",
+    "city": "Medellin",
+    "creditCard": "1234567890123456",
+    "month": "06",
+    "year": "2024"
+  }
+}
