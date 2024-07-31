@@ -1,4 +1,4 @@
-1. No es necesario especificar un json de productos ya que se utiliza el mismo tomado de los webdrivers.
+1. No es necesario especificar un json de productos ya que se utiliza el mismo tomado de los selectores.
 2. Utilizar json files para agregar información que no es muy relevante para el test por ejemplo el usuario y sus datos,
 esto evitará que se encuentren quemados en el código y probar con diferentes usuarios segun el json.
 3. Utilización de autoconfigure para los drivers es necesario para facilitar la ejecución en otros computadores.

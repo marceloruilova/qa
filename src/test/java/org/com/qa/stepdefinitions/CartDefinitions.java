@@ -1,7 +1,9 @@
 package org.com.qa.stepdefinitions;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -20,6 +22,8 @@ import org.com.qa.tasks.OpenMainPageTask;
 import org.com.qa.userinterfaces.CartPageElements;
 import org.com.qa.userinterfaces.MainPageElements;
 import org.com.qa.userinterfaces.OrderModalElements;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 
 import java.io.IOException;
@@ -30,6 +34,16 @@ public class CartDefinitions {
     WebDriver driver;
 
     private JsonNode testData;
+
+    @After
+    public void tearDown(Scenario scenario) {
+        if (scenario.isFailed()) {
+            scenario.log("Scenario failing, please refer to the image attaches to this report");
+            final byte[] screenshot = ((TakesScreenshot) driver)
+                    .getScreenshotAs(OutputType.BYTES);
+            scenario.attach(screenshot,"image/png","Screenshot of the error");
+        }
+    }
 
     @Before
     public void setTheStage() throws IOException {
@@ -91,7 +105,7 @@ public class CartDefinitions {
     @Then("the user clicks another product {string}")
     public void clickAnotherProduct(String productNumber) {
         OnStage.theActorInTheSpotlight().attemptsTo(
-                ClickProductAction.addProduct(MainPageElements.PRODUCT(productNumber))
+                ClickProductAction.addProduct(MainPageElements.PRODUCT(productNumber+"x"))
         );
     }
 
@@ -137,7 +151,7 @@ public class CartDefinitions {
         Assertions.assertThat(isModalVisible).isTrue();
     }
 
-    @Then("the user fills the fields and sweet alert is shown")
+    @Then("the user fills the fields with json data and sweet alert is shown")
     public void writeFieldsInformation() {
         Actor actor = OnStage.theActorInTheSpotlight();
 

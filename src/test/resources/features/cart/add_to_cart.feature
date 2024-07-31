@@ -26,7 +26,7 @@ Feature: Add new products to the cart
     Then selected products should be on the cart page
 
     When the user clicks the place order button
-    Then the user fills the fields and sweet alert is shown
+    Then the user fills the fields with json data and sweet alert is shown
     Examples:
     | numberOfProducts| productNumber1 | productNumber2 |
     | 3               | 1              | 2              |
